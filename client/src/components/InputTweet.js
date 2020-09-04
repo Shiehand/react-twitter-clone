@@ -1,16 +1,35 @@
 import React, { Component } from "react";
+const API_URL = "http://localhost:5000/tweets";
 
 export default class InputTweet extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      tweet: "",
+      body: "",
+      name: "",
     };
   }
 
   handleSubmit = (event) => {
+    const tweet = {
+      name: this.state.name,
+      body: this.state.body,
+    };
     event.preventDefault();
+    fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify(tweet),
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        this.props.createTweet();
+      }
+    });
   };
 
   handleChange = (event) => {
@@ -23,9 +42,16 @@ export default class InputTweet extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <input
+            name="name"
+            value={this.state.name}
+            placeholder="Enter your name..."
+            onChange={this.handleChange}
+          ></input>
+
           <textarea
-            name="tweet"
-            value={this.state.tweet}
+            name="body"
+            value={this.state.body}
             placeholder="Enter your tweet..."
             onChange={this.handleChange}
           ></textarea>

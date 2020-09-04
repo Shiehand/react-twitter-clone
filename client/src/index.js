@@ -4,9 +4,11 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import InputTweet from "./components/InputTweet";
 
+const createTweet = () => {};
+
 ReactDOM.render(
   <React.StrictMode>
-    <InputTweet />
+    <InputTweet createTweet={createTweet} />
   </React.StrictMode>,
   document.getElementById("root")
 );
