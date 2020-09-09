@@ -1,15 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
+import Tweet from "./Tweet";
 
-export default class Tweets extends Component {
-  constructor(props) {
-    super(props);
+const API_URL = "http://localhost:5000/tweets";
 
-    this.state = {
-      comment: "",
-    };
-  }
+export default class Tweets extends React.Component {
+  state = {
+    tweets: [],
+  };
+
+  fetchTweet = async () => {
+    const response = await (await fetch(API_URL)).json();
+    this.setState({
+      tweets: response.tweets,
+    });
+  };
 
   render() {
-    return <div>{this.props.body}</div>;
+    return (
+      <div>
+        {this.state.tweets.map((element) => {
+          return <Tweet key={element.id} content={element} />;
+        })}
+        <button onClick={this.fetchTweet}>Refresh</button>
+      </div>
+    );
   }
 }

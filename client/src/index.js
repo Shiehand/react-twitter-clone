@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import InputTweet from "./components/InputTweet";
-
-const createTweet = () => {};
+import Tweets from "./components/Tweets";
 
 ReactDOM.render(
   <React.StrictMode>
-    <InputTweet createTweet={createTweet} />
+    <InputTweet />
+    <Tweets />
   </React.StrictMode>,
   document.getElementById("root")
 );

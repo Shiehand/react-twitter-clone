@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import shortid from "shortid";
 const API_URL = "http://localhost:5000/tweets";
 
 export default class InputTweet extends Component {
@@ -13,6 +14,7 @@ export default class InputTweet extends Component {
 
   handleSubmit = (event) => {
     const tweet = {
+      id: shortid.generate(),
       name: this.state.name,
       body: this.state.body,
     };
@@ -26,8 +28,6 @@ export default class InputTweet extends Component {
     }).then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
-      } else {
-        this.props.createTweet();
       }
     });
   };

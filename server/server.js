@@ -13,8 +13,13 @@ app.get("/", (req, res) => {
   res.send("Express");
 });
 
+app.get("/tweets", (req, res) => {
+  res.json({ tweets: tweets });
+});
+
 app.post("/tweets", (req, res) => {
   tweets.push(req.body);
+  res.sendStatus(200);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
