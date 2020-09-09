@@ -1,5 +1,6 @@
 import React from "react";
 import Tweet from "./Tweet";
+import '../styles/tweet.css';
 
 const API_URL = "http://localhost:5000/tweets";
 
@@ -17,7 +18,7 @@ export default class Tweets extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='tweets-container'>
         {this.state.tweets.map((element) => {
           return <Tweet key={element.id} content={element} />;
         })}
