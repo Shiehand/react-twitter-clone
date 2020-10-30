@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import shortid from "shortid";
 import '../styles/app.css'
 
-const API_URL = "http://localhost:5000/tweets";
+const API_URL = "http://localhost:5000/tweet";
 
 export default class InputTweet extends Component {
   constructor(props) {
@@ -16,7 +16,6 @@ export default class InputTweet extends Component {
 
   handleSubmit = (event) => {
     const tweet = {
-      id: shortid.generate(),
       name: this.state.name,
       body: this.state.body,
     };
@@ -45,8 +44,8 @@ export default class InputTweet extends Component {
   };
 
   submitTextArea = (event) => {
-    if (event.keyCode == 13 && !event.shiftKey) {
-        this.handleSubmit(event);
+    if (event.keyCode === 13 && !event.shiftKey) {
+      this.handleSubmit(event);
     }
   }
   render() {
@@ -62,7 +61,7 @@ export default class InputTweet extends Component {
           ></input>
 
           <textarea
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             className="input-body"
             name="body"
             value={this.state.body}
