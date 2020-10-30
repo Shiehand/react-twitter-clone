@@ -12,7 +12,7 @@ export default class Tweets extends React.Component {
   fetchTweet = async () => {
     const response = await (await fetch(API_URL)).json();
     this.setState({
-      tweets: response.tweets,
+      tweets: response,
     });
   };
 

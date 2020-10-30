@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import shortid from "shortid";
 import '../styles/app.css'
 
 const API_URL = "http://localhost:5000/tweet";
