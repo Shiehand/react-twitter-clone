@@ -11,13 +11,23 @@ app.use(express.json());
 app.get("/tweets", async (req, res) => {
   try {
     const allTweets = await pool.query(
-      "SELECT * FROM tweets"
+      "SELECT * FROM tweets ORDER BY id ASC"
     );
     res.json(allTweets.rows);
   } catch (err) {
     console.error(err.message);
   }
 });
+
+app.get("/like/:id", async (req, res) => {
+  try {
+    await pool.query(
+      "UPDATE tweets SET likes = likes + 1 WHERE id = $1", [req.params.id]
+    );
+  } catch (err) {
+    console.error(err.message);
+  }
+})
 
 app.post("/tweet", async (req, res) => {
   try {
