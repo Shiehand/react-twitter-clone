@@ -24,6 +24,7 @@ app.get("/like/:id", async (req, res) => {
     await pool.query(
       "UPDATE tweets SET likes = likes + 1 WHERE id = $1", [req.params.id]
     );
+    res.sendStatus(200);
   } catch (err) {
     console.error(err.message);
   }
