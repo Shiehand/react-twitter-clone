@@ -1,6 +1,14 @@
 import React from "react";
 import '../styles/tweet.css';
 
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import RefreshIcon from '@material-ui/icons/Refresh'
+import LikeIcon from '@material-ui/icons/ThumbUp'
+import Paper from '@material-ui/core/Paper'
+import NextIcon from '@material-ui/icons/NavigateNext'
+import PrevIcon from '@material-ui/icons/NavigateBefore'
+
 const LIKE_URL = "http://localhost:5000/like";
 const FETCH_URL = "http://localhost:5000/tweets";
 const PAGE_SIZE = 5;
@@ -40,6 +48,11 @@ export default class Tweets extends React.Component {
     }
   }
 
+  formatDate = (date) => {
+    const options = { year: "numeric", month: "long", day: "numeric" }
+    return new Date(date).toLocaleDateString(undefined, options)
+  }
+
   componentDidMount() {
     this.fetchTweet();
   }
@@ -50,14 +63,23 @@ export default class Tweets extends React.Component {
       <div className='tweets-container'>
         {this.state.tweets.slice(i, i + PAGE_SIZE).map((tweet) => {
           return <ul key={tweet.id}>
-            <div>{tweet.name}</div>
-            <div>{tweet.body}</div>
-            <button onClick={() => this.submitLike(tweet.id)}>{tweet.likes}</button>
+            <Paper className="tweet-container" elevation={3}>
+              <div>{tweet.name} at <span style={{color: '#0000FF'}}>{this.formatDate(tweet.date)}</span></div>
+              <div></div>
+              <div>{tweet.body}</div>
+              <Button size="small" color="primary" startIcon={<LikeIcon />} onClick={() => this.submitLike(tweet.id)}>
+                {tweet.likes}
+              </Button>
+            </Paper>
           </ul>;
         })}
-        <button onClick={this.prevPage}>Previous</button>
-        <button onClick={this.nextPage}>Next</button>
-        <button onClick={this.fetchTweet}>Refresh</button>
+        <div className='next-prev-container'>
+          <IconButton onClick={this.prevPage}><PrevIcon /></IconButton>
+          <IconButton onClick={this.nextPage}><NextIcon /></IconButton>
+        </div>
+        <div className='refresh-container'>
+          <IconButton variant="contained" size="small" color="primary" onClick={this.fetchTweet}><RefreshIcon /></IconButton>
+        </div>
       </div>
     );
   }

@@ -1,5 +1,23 @@
 .tweets-container {
-    width: 80%;
-    margin: 5vh auto;
-    overflow-wrap: break-word;
+	width: 80%;
+	margin: 5vh auto;
+	overflow-wrap: break-word;
+}
+
+.tweet-container {
+	padding: 1%;
+}
+
+.next-prev-container {
+	display: flex;
+	justify-content: center;
+}
+
+.refresh-container {
+	display: flex;
+	justify-content: center;
+}
+
+body {
+	padding: 1%;
 }

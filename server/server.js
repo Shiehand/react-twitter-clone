@@ -34,9 +34,11 @@ app.post("/tweet", async (req, res) => {
   try {
     const { name } = req.body;
     const { body } = req.body;
+    console.log(name === "");
+    const now = new Date();
     const newTweet = await pool.query(
-      "INSERT INTO tweets (name, body) VALUES ($1, $2) RETURNING *",
-      [name, body]
+      "INSERT INTO tweets (name, body, date) VALUES ($1, $2, $3) RETURNING *",
+      [name, body, now]
     );
     res.json(newTweet.rows[0]);
   } catch (err) {
